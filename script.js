@@ -1806,3 +1806,627 @@ openLesson = function(number) {
   originalOpenLesson(number);
 
 };
+/* ==================================================
+   PART 5 — LESSON 3
+   GERMAN NUMBERS
+================================================== */
+
+
+const numbersLesson = [
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "eins" mean?',
+
+    audio:
+      "eins",
+
+    answers: [
+      "One",
+      "Two",
+      "Three",
+      "Four"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Eins" means one.'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "fünf" mean?',
+
+    audio:
+      "fünf",
+
+    answers: [
+      "Three",
+      "Four",
+      "Five",
+      "Six"
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Fünf" means five.'
+  },
+
+
+  {
+    type: "CHOOSE",
+
+    question:
+      'Which German word means "ten"?',
+
+    audio:
+      "zehn",
+
+    answers: [
+      "acht",
+      "zehn",
+      "zwölf",
+      "sieben"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Zehn" means ten.'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "zwanzig" mean?',
+
+    audio:
+      "zwanzig",
+
+    answers: [
+      "Fifteen",
+      "Eighteen",
+      "Twenty",
+      "Thirty"
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Zwanzig" means twenty.'
+  },
+
+
+  {
+    type: "CHOOSE",
+
+    question:
+      'Which one means "three" in German?',
+
+    audio:
+      "drei",
+
+    answers: [
+      "drei",
+      "vier",
+      "zwei",
+      "neun"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Drei" means three.'
+  }
+
+];
+
+
+let lesson3CurrentQuestion = 0;
+
+let lesson3Score = 0;
+
+let lesson3XP = 0;
+
+
+/* ==================================================
+   START LESSON 3
+================================================== */
+
+function startLesson3() {
+
+  lesson3CurrentQuestion = 0;
+
+  lesson3Score = 0;
+
+  lesson3XP = 0;
+
+
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson3Player")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson3Result")
+    .classList.add("hidden");
+
+
+  loadLesson3Question();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   LOAD QUESTION
+================================================== */
+
+function loadLesson3Question() {
+
+  const question =
+    numbersLesson[
+      lesson3CurrentQuestion
+    ];
+
+
+  document
+    .getElementById("lesson3QuestionType")
+    .textContent =
+    question.type;
+
+
+  document
+    .getElementById("lesson3QuestionText")
+    .textContent =
+    question.question;
+
+
+  document
+    .getElementById("lesson3QuestionNumber")
+    .textContent =
+    lesson3CurrentQuestion + 1;
+
+
+  document
+    .getElementById("lesson3TotalQuestions")
+    .textContent =
+    numbersLesson.length;
+
+
+  const percentage =
+
+    (
+      (lesson3CurrentQuestion + 1)
+      /
+      numbersLesson.length
+    ) * 100;
+
+
+  document
+    .getElementById("lesson3Progress")
+    .style.width =
+    percentage + "%";
+
+
+  document
+    .getElementById("lesson3XP")
+    .textContent =
+    lesson3XP;
+
+
+  const grid =
+    document.getElementById(
+      "lesson3AnswerGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  question.answers.forEach(
+
+    function(answer, index) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "answer-option";
+
+
+      button.textContent =
+        answer;
+
+
+      button.onclick = function() {
+
+        selectLesson3Answer(
+          index,
+          button
+        );
+
+      };
+
+
+      grid.appendChild(button);
+
+    }
+
+  );
+
+
+  document
+    .getElementById("lesson3Feedback")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson3NextButton")
+    .classList.add("hidden");
+
+}
+
+
+/* ==================================================
+   SELECT ANSWER
+================================================== */
+
+function selectLesson3Answer(
+  selected,
+  button
+) {
+
+  const question =
+    numbersLesson[
+      lesson3CurrentQuestion
+    ];
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#lesson3AnswerGrid .answer-option"
+    );
+
+
+  buttons.forEach(
+
+    function(btn) {
+
+      btn.disabled = true;
+
+    }
+
+  );
+
+
+  const correct =
+    selected === question.correct;
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    lesson3Score++;
+
+    lesson3XP += 10;
+
+
+    document
+      .getElementById("lesson3FeedbackIcon")
+      .textContent =
+      "✓";
+
+
+    document
+      .getElementById("lesson3FeedbackTitle")
+      .textContent =
+      "Correct! 🎉";
+
+
+    document
+      .getElementById("lesson3FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    buttons[
+      question.correct
+    ].classList.add(
+      "correct"
+    );
+
+
+    document
+      .getElementById("lesson3FeedbackIcon")
+      .textContent =
+      "✕";
+
+
+    document
+      .getElementById("lesson3FeedbackTitle")
+      .textContent =
+      "Not quite";
+
+
+    document
+      .getElementById("lesson3FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+
+  document
+    .getElementById("lesson3XP")
+    .textContent =
+    lesson3XP;
+
+
+  document
+    .getElementById("lesson3Feedback")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("lesson3NextButton")
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* ==================================================
+   NEXT QUESTION
+================================================== */
+
+function nextLesson3Question() {
+
+  lesson3CurrentQuestion++;
+
+
+  if (
+    lesson3CurrentQuestion >=
+    numbersLesson.length
+  ) {
+
+    finishLesson3();
+
+    return;
+
+  }
+
+
+  loadLesson3Question();
+
+}
+
+
+/* ==================================================
+   FINISH LESSON 3
+================================================== */
+
+function finishLesson3() {
+
+  const lessonNumber = 3;
+
+
+  if (
+    !userData.completedLessons
+      .includes(lessonNumber)
+  ) {
+
+    userData.completedLessons.push(
+      lessonNumber
+    );
+
+    userData.completed++;
+
+    userData.xp += lesson3XP;
+
+    saveProgress();
+
+  }
+
+
+  document
+    .getElementById("lesson3Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson3Result")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson3FinalScore")
+    .textContent =
+
+    lesson3Score +
+    "/" +
+    numbersLesson.length;
+
+
+  document
+    .getElementById("lesson3FinalXP")
+    .textContent =
+
+    "+" +
+    lesson3XP +
+    " XP";
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   CLOSE LESSON 3
+================================================== */
+
+function closeLesson3() {
+
+  document
+    .getElementById("lesson3Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+}
+
+
+/* ==================================================
+   RETURN TO DASHBOARD
+================================================== */
+
+function returnFromLesson3() {
+
+  document
+    .getElementById("lesson3Result")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   RESTART LESSON 3
+================================================== */
+
+function restartLesson3() {
+
+  document
+    .getElementById("lesson3Result")
+    .classList.add("hidden");
+
+
+  startLesson3();
+
+}
+
+
+/* ==================================================
+   LESSON 3 AUDIO
+================================================== */
+
+function playLesson3Audio() {
+
+  const question =
+    numbersLesson[
+      lesson3CurrentQuestion
+    ];
+
+
+  speakGerman(
+    question.audio
+  );
+
+}
+
+
+/* ==================================================
+   CONNECT LESSON 3
+================================================== */
+
+const previousOpenLesson =
+  openLesson;
+
+
+openLesson = function(number) {
+
+  if (number === 3) {
+
+    if (
+      !userData.completedLessons
+        .includes(2)
+    ) {
+
+      showMessage(
+        "Complete Lesson 2 first 🔒"
+      );
+
+      return;
+
+    }
+
+
+    startLesson3();
+
+    return;
+
+  }
+
+
+  previousOpenLesson(number);
+
+};
