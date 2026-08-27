@@ -1,186 +1,354 @@
-/* =========================================
-   DEUTSCH. — INTERACTIVE JAVASCRIPT
-========================================= */
+/* ==================================================
+   DEUTSCH. — INTERACTIVE SYSTEM
+================================================== */
 
 
-/* =========================================
-   START LEARNING
-========================================= */
+/* ==================================================
+   USER DATA
+================================================== */
 
-function startLearning() {
+let userData = {
 
-  document
-    .getElementById("levels")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
+  xp: 0,
+
+  streak: 1,
+
+  completed: 0,
+
+  completedLessons: []
+
+};
+
+
+/* Load saved progress */
+
+const savedData =
+  localStorage.getItem("deutschProgress");
+
+
+if (savedData) {
+
+  userData =
+    JSON.parse(savedData);
 
 }
 
 
-/* =========================================
-   LEVEL TEST
-========================================= */
+/* Save progress */
 
-function levelTest() {
+function saveProgress() {
 
-  alert(
-    "🇩🇪 Level Test\n\n" +
-    "This interactive test will help you find your German level.\n\n" +
-    "Coming in the next version!"
+  localStorage.setItem(
+    "deutschProgress",
+    JSON.stringify(userData)
   );
 
 }
 
 
-/* =========================================
-   GERMAN PRONUNCIATION
-========================================= */
+/* ==================================================
+   START LEARNING
+================================================== */
 
-function speakGerman() {
+function startLearning() {
 
-  const text = "Ich bin Rahul.";
+  document
+    .getElementById("home")
+    .classList.add("hidden");
 
-  if ("speechSynthesis" in window) {
+  document
+    .getElementById("features")
+    ?.classList.add("hidden");
 
-    const speech =
-      new SpeechSynthesisUtterance(text);
+  document
+    .getElementById("levels")
+    ?.classList.add("hidden");
 
-    speech.lang = "de-DE";
+  document
+    .querySelector(".challenge-section")
+    ?.classList.add("hidden");
 
-    speech.rate = 0.85;
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
 
-    window.speechSynthesis.speak(speech);
+  updateDashboard();
 
-  } else {
-
-    alert(
-      "Your browser does not support German pronunciation."
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   ANSWER SYSTEM
-========================================= */
-
-function answer(button, correct) {
-
-  const buttons =
-    document.querySelectorAll(".answers button");
-
-  buttons.forEach(function(btn) {
-
-    btn.disabled = true;
-
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
   });
 
+}
 
-  if (correct) {
 
-    button.classList.add("correct");
+/* ==================================================
+   BACK HOME
+================================================== */
 
-    button.innerHTML =
-      "✓ I am Rahul.";
+function backHome() {
 
-    showMessage(
-      "Correct! +20 XP 🎉"
-    );
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
 
-  } else {
+  document
+    .getElementById("home")
+    .classList.remove("hidden");
 
-    button.classList.add("wrong");
+  document
+    .getElementById("features")
+    ?.classList.remove("hidden");
 
-    showMessage(
-      "Not quite! Try another lesson."
-    );
+  document
+    .getElementById("levels")
+    ?.classList.remove("hidden");
 
-  }
+  document
+    .querySelector(".challenge-section")
+    ?.classList.remove("hidden");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 
 }
 
 
-/* =========================================
-   MESSAGE
-========================================= */
-
-function showMessage(message) {
-
-  const existing =
-    document.querySelector(".feedback");
-
-  if (existing) {
-
-    existing.remove();
-
-  }
-
-
-  const feedback =
-    document.createElement("div");
-
-  feedback.className = "feedback";
-
-  feedback.textContent = message;
-
-  feedback.style.position = "fixed";
-  feedback.style.bottom = "25px";
-  feedback.style.left = "50%";
-  feedback.style.transform = "translateX(-50%)";
-  feedback.style.padding = "13px 20px";
-  feedback.style.background = "#171717";
-  feedback.style.color = "white";
-  feedback.style.borderRadius = "10px";
-  feedback.style.fontSize = "13px";
-  feedback.style.fontWeight = "600";
-  feedback.style.zIndex = "999";
-
-
-  document.body.appendChild(feedback);
-
-
-  setTimeout(function() {
-
-    feedback.remove();
-
-  }, 2500);
-
-}
-
-
-/* =========================================
+/* ==================================================
    LEVEL SELECTION
-========================================= */
+================================================== */
 
 function selectLevel(level) {
 
   if (level === "A1") {
 
-    alert(
-      "🇩🇪 A1 Beginner\n\n" +
-      "Perfect starting point!\n\n" +
-      "Your interactive A1 course will appear here."
-    );
+    startLearning();
+
+    return;
 
   }
 
-  if (level === "A2") {
 
-    alert(
-      "🇩🇪 A2 Elementary\n\n" +
-      "Build on your German foundation."
+  alert(
+
+    level +
+    " course is coming soon! 🇩🇪"
+
+  );
+
+}
+
+
+/* ==================================================
+   DASHBOARD UPDATE
+================================================== */
+
+function updateDashboard() {
+
+  document
+    .getElementById("xpValue")
+    .textContent =
+    userData.xp;
+
+
+  document
+    .getElementById("streakValue")
+    .textContent =
+    userData.streak;
+
+
+  document
+    .getElementById("completedValue")
+    .textContent =
+
+    userData.completed +
+    " / 6";
+
+
+  const percentage =
+
+    Math.round(
+      (userData.completed / 6) * 100
     );
+
+
+  document
+    .getElementById("progressValue")
+    .textContent =
+    percentage + "%";
+
+
+  document
+    .getElementById("progressText")
+    .textContent =
+
+    percentage +
+    "% complete";
+
+
+  document
+    .getElementById("courseProgress")
+    .style.width =
+
+    percentage + "%";
+
+
+  updateLessonStates();
+
+}
+
+
+/* ==================================================
+   LESSON STATES
+================================================== */
+
+function updateLessonStates() {
+
+  const lessons =
+    document.querySelectorAll(
+      ".course-lesson"
+    );
+
+
+  lessons.forEach(
+    function(lesson, index) {
+
+      const number = index + 1;
+
+
+      const status =
+        lesson.querySelector(
+          ".lesson-status"
+        );
+
+
+      if (
+        userData.completedLessons
+          .includes(number)
+      ) {
+
+        status.textContent =
+          "✓ DONE";
+
+        status.classList.remove(
+          "locked"
+        );
+
+      }
+
+      else if (
+        number === 1 ||
+        userData.completedLessons
+          .includes(number - 1)
+      ) {
+
+        status.textContent =
+          "START";
+
+        status.classList.remove(
+          "locked"
+        );
+
+      }
+
+      else {
+
+        status.textContent =
+          "LOCKED";
+
+        status.classList.add(
+          "locked"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   OPEN LESSON
+================================================== */
+
+function openLesson(number) {
+
+  if (
+    number > 1 &&
+    !userData.completedLessons.includes(
+      number - 1
+    )
+  ) {
+
+    showMessage(
+      "Complete the previous lesson first 🔒"
+    );
+
+    return;
 
   }
 
-  if (level === "B1") {
 
-    alert(
-      "🇩🇪 B1 Intermediate\n\n" +
-      "Get ready for real-world German."
+  if (number === 1) {
+
+    startLessonOne();
+
+    return;
+
+  }
+
+
+  showMessage(
+    "Lesson " +
+    number +
+    " will be added soon! 🇩🇪"
+  );
+
+}
+
+
+/* ==================================================
+   LESSON ONE
+================================================== */
+
+function startLessonOne() {
+
+  const lesson =
+
+    prompt(
+
+      "🇩🇪 LESSON 01 — GREETINGS\n\n" +
+
+      "What does \"Guten Morgen\" mean?\n\n" +
+
+      "A) Good morning\n" +
+
+      "B) Good night\n" +
+
+      "C) Goodbye\n\n" +
+
+      "Type A, B or C:"
+    );
+
+
+  if (!lesson) return;
+
+
+  if (
+    lesson.toUpperCase() === "A"
+  ) {
+
+    completeLesson(1);
+
+  }
+
+  else {
+
+    showMessage(
+      "Not quite! Guten Morgen = Good morning."
     );
 
   }
@@ -188,38 +356,197 @@ function selectLevel(level) {
 }
 
 
-/* =========================================
+/* ==================================================
+   COMPLETE LESSON
+================================================== */
+
+function completeLesson(number) {
+
+  if (
+    !userData.completedLessons.includes(
+      number
+    )
+  ) {
+
+    userData.completedLessons.push(
+      number
+    );
+
+    userData.completed++;
+
+    userData.xp += 20;
+
+    saveProgress();
+
+  }
+
+
+  updateDashboard();
+
+
+  showMessage(
+    "Lesson complete! +20 XP 🎉"
+  );
+
+}
+
+
+/* ==================================================
+   SPEECH
+================================================== */
+
+function speakGerman(text) {
+
+  if (
+    !("speechSynthesis" in window)
+  ) {
+
+    alert(
+      "Your browser does not support speech synthesis."
+    );
+
+    return;
+
+  }
+
+
+  const speech =
+    new SpeechSynthesisUtterance(text);
+
+
+  speech.lang = "de-DE";
+
+  speech.rate = 0.85;
+
+
+  window.speechSynthesis.speak(
+    speech
+  );
+
+}
+
+
+/* ==================================================
+   PREVIEW ANSWERS
+================================================== */
+
+function answer(button, correct) {
+
+  const buttons =
+    document.querySelectorAll(
+      ".answers button"
+    );
+
+
+  buttons.forEach(
+    function(btn) {
+
+      btn.disabled = true;
+
+    }
+  );
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+    button.textContent =
+      "✓ I am Rahul.";
+
+    showMessage(
+      "Correct! 🎉"
+    );
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+    showMessage(
+      "Not quite. Try again in the course!"
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   LEVEL TEST
+================================================== */
+
+function levelTest() {
+
+  alert(
+
+    "🇩🇪 German Level Test\n\n" +
+
+    "This will become a complete\n" +
+
+    "interactive placement test.\n\n" +
+
+    "Coming in Part 3!"
+
+  );
+
+}
+
+
+/* ==================================================
    DAILY CHALLENGE
-========================================= */
+================================================== */
 
 function dailyChallenge() {
 
-  const challenge =
-    "🇩🇪 Daily Challenge\n\n" +
-    "Translate:\n\n" +
-    "Guten Morgen!\n\n" +
-    "A) Good morning\n" +
-    "B) Good night\n" +
-    "C) Good evening";
-
-
   const answer =
-    prompt(challenge + "\n\nType A, B or C:");
+
+    prompt(
+
+      "🔥 DAILY CHALLENGE\n\n" +
+
+      "Translate:\n\n" +
+
+      "\"Danke\"\n\n" +
+
+      "A) Hello\n" +
+
+      "B) Thank you\n" +
+
+      "C) Goodbye\n\n" +
+
+      "Type A, B or C:"
+    );
 
 
   if (!answer) return;
 
 
-  if (answer.toUpperCase() === "A") {
+  if (
+    answer.toUpperCase() === "B"
+  ) {
+
+    userData.xp += 10;
+
+    saveProgress();
+
+    updateDashboard();
 
     showMessage(
       "Correct! +10 XP 🔥"
     );
 
-  } else {
+  }
+
+  else {
 
     showMessage(
-      "Almost! Guten Morgen = Good morning."
+      "Danke = Thank you 🇩🇪"
     );
 
   }
@@ -227,10 +554,104 @@ function dailyChallenge() {
 }
 
 
-/* =========================================
-   INITIAL PAGE MESSAGE
-========================================= */
+/* ==================================================
+   FEEDBACK MESSAGE
+================================================== */
+
+function showMessage(message) {
+
+  const old =
+    document.querySelector(
+      ".feedback"
+    );
+
+
+  if (old) {
+
+    old.remove();
+
+  }
+
+
+  const feedback =
+    document.createElement(
+      "div"
+    );
+
+
+  feedback.className =
+    "feedback";
+
+
+  feedback.textContent =
+    message;
+
+
+  feedback.style.position =
+    "fixed";
+
+
+  feedback.style.bottom =
+    "25px";
+
+
+  feedback.style.left =
+    "50%";
+
+
+  feedback.style.transform =
+    "translateX(-50%)";
+
+
+  feedback.style.padding =
+    "13px 20px";
+
+
+  feedback.style.background =
+    "#171717";
+
+
+  feedback.style.color =
+    "white";
+
+
+  feedback.style.borderRadius =
+    "10px";
+
+
+  feedback.style.fontSize =
+    "13px";
+
+
+  feedback.style.fontWeight =
+    "600";
+
+
+  feedback.style.zIndex =
+    "999";
+
+
+  document.body.appendChild(
+    feedback
+  );
+
+
+  setTimeout(
+    function() {
+
+      feedback.remove();
+
+    },
+    2500
+  );
+
+}
+
+
+/* ==================================================
+   INITIALIZE
+================================================== */
 
 console.log(
-  "🇩🇪 Deutsch. — Interactive German Learning Platform"
+  "🇩🇪 Deutsch. Interactive Learning Platform loaded."
 );
