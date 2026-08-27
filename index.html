@@ -1,1 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Deutsch. — Learn German</title>
+
+  <meta
+    name="description"
+    content="Learn German through interactive lessons."
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     NAVBAR
+================================================== -->
+
+<header class="navbar">
+
+  <a href="#" class="logo">
+
+    <span class="logo-box">D</span>
+
+    <span>
+      Deutsch<span class="red">.</span>
+    </span>
+
+  </a>
+
+
+  <nav class="nav-links">
+
+    <a href="#learn">Learn</a>
+
+    <a href="#features">Features</a>
+
+    <a href="#levels">Levels</a>
+
+  </nav>
+
+
+  <button
+    class="nav-btn"
+    onclick="startLearning()"
+  >
+
+    Start Learning →
+
+  </button>
+
+</header>
+
+
+
+<!-- ==================================================
+     HOME
+================================================== -->
+
+<main id="home">
+
+
+<section class="hero">
+
+
+<div class="hero-content">
+
+
+<div class="badge">
+
+  <span class="green-dot"></span>
+
+  Interactive German Learning
+
+</div>
+
+
+<h1>
+
+  Learn German.
+
+  <br>
+
+  <span>One interaction</span>
+
+  <br>
+
+  at a time.
+
+</h1>
+
+
+<p class="hero-description">
+
+  Master German through interactive lessons,
+  vocabulary games, grammar challenges and
+  real-world practice.
+
+</p>
+
+
+<div class="hero-buttons">
+
+
+<button
+  class="primary-btn"
+  onclick="startLearning()"
+>
+
+  Start Learning →
+
+</button>
+
+
+<button
+  class="secondary-btn"
+  onclick="levelTest()"
+>
+
+  Take a Level Test
+
+</button>
+
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+<strong>3</strong>
+
+<span>Learning Levels</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong>100+</strong>
+
+<span>Interactive Exercises</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong>∞</strong>
+
+<span>Practice</span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- HERO PREVIEW -->
+
+
+<div class="lesson-card">
+
+
+<div class="lesson-header">
+
+<div>
+
+<span class="lesson-label">
+
+A1 · LESSON 01
+
+</span>
+
+
+<h3>
+
+Introduce Yourself
+
+</h3>
+
+</div>
+
+
+<div class="xp">
+
+⚡ +20 XP
+
+</div>
+
+</div>
+
+
+<div class="progress-bar">
+
+<div class="progress"></div>
+
+</div>
+
+
+<div class="question-box">
+
+<span class="question-label">
+
+Translate this sentence
+
+</span>
+
+
+<h2>
+
+Ich bin Rahul.
+
+</h2>
+
+
+<button
+  class="listen-btn"
+  onclick="speakGerman('Ich bin Rahul.')"
+>
+
+🔊 Listen
+
+</button>
+
+</div>
+
+
+<div class="answers">
+
+
+<button onclick="previewAnswer(this,true)">
+
+I am Rahul.
+
+</button>
+
+
+<button onclick="previewAnswer(this,false)">
+
+I live in Rahul.
+
+</button>
+
+
+<button onclick="previewAnswer(this,false)">
+
+My name is Germany.
+
+</button>
+
+
+</div>
+
+
+<div class="lesson-footer">
+
+<span>
+
+Question 3 of 10
+
+</span>
+
+
+<span>
+
+30 XP possible
+
+</span>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     FEATURES
+================================================== -->
+
+<section
+  class="section"
+  id="features"
+>
+
+
+<div class="section-heading">
+
+<span>
+WHY DEUTSCH.
+</span>
+
+
+<h2>
+
+Not another boring
+<br>
+language course.
+
+</h2>
+
+</div>
+
+
+<div class="feature-grid">
+
+
+<div class="feature-card">
+
+<div class="feature-icon">
+🧠
+</div>
+
+
+<h3>
+
+Interactive Learning
+
+</h3>
+
+
+<p>
+
+Learn by answering, choosing,
+matching and solving.
+
+</p>
+
+</div>
+
+
+
+<div class="feature-card">
+
+<div class="feature-icon">
+🇩🇪
+</div>
+
+
+<h3>
+
+Real German
+
+</h3>
+
+
+<p>
+
+Practice German phrases
+you can actually use.
+
+</p>
+
+</div>
+
+
+
+<div class="feature-card">
+
+<div class="feature-icon">
+🏆
+</div>
+
+
+<h3>
+
+Gamified Progress
+
+</h3>
+
+
+<p>
+
+Earn XP, maintain streaks
+and unlock achievements.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     LEVELS
+================================================== -->
+
+<section
+  class="levels-section"
+  id="levels"
+>
+
+
+<div class="section-heading center">
+
+<span>
+YOUR JOURNEY
+</span>
+
+
+<h2>
+
+Start from zero.
+<br>
+Build your German.
+
+</h2>
+
+</div>
+
+
+<div class="level-grid">
+
+
+<div
+  class="level-card"
+  onclick="selectLevel('A1')"
+>
+
+<div class="level-number">
+A1
+</div>
+
+
+<div>
+
+<h3>
+Beginner
+</h3>
+
+
+<p>
+
+Build your German foundation
+from zero.
+
+</p>
+
+</div>
+
+
+<div class="level-bottom">
+
+<span>
+30+ lessons
+</span>
+
+<span>
+→
+</span>
+
+</div>
+
+</div>
+
+
+
+<div
+  class="level-card"
+  onclick="selectLevel('A2')"
+>
+
+<div class="level-number">
+A2
+</div>
+
+
+<div>
+
+<h3>
+Elementary
+</h3>
+
+
+<p>
+
+Understand more conversations
+and express yourself.
+
+</p>
+
+</div>
+
+
+<div class="level-bottom">
+
+<span>
+35+ lessons
+</span>
+
+<span>
+→
+</span>
+
+</div>
+
+</div>
+
+
+
+<div
+  class="level-card"
+  onclick="selectLevel('B1')"
+>
+
+<div class="level-number">
+B1
+</div>
+
+
+<div>
+
+<h3>
+Intermediate
+</h3>
+
+
+<p>
+
+Handle real-world conversations
+with confidence.
+
+</p>
+
+</div>
+
+
+<div class="level-bottom">
+
+<span>
+40+ lessons
+</span>
+
+<span>
+→
+</span>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     DAILY CHALLENGE
+================================================== -->
+
+<section class="challenge-section">
+
+
+<div class="challenge-icon">
+🔥
+</div>
+
+
+<div class="challenge-content">
+
+<span>
+DAILY CHALLENGE
+</span>
+
+
+<h2>
+5 minutes of German every day.
+</h2>
+
+
+<p>
+
+Keep your streak alive with a quick
+interactive challenge.
+
+</p>
+
+</div>
+
+
+<button
+  class="primary-btn"
+  onclick="dailyChallenge()"
+>
+
+Today's Challenge →
+
+</button>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     A1 DASHBOARD
+================================================== -->
+
+<section
+  id="dashboard"
+  class="dashboard hidden"
+>
+
+
+<div class="dashboard-container">
+
+
+<div class="dashboard-header">
+
+
+<div>
+
+<span class="dashboard-label">
+YOUR LEARNING PATH
+</span>
+
+
+<h1>
+A1 German
+</h1>
+
+
+<p>
+Start your German journey from the beginning.
+</p>
+
+</div>
+
+
+<button
+  class="back-btn"
+  onclick="backHome()"
+>
+
+← Back Home
+
+</button>
+
+</div>
+
+
+
+<!-- DASHBOARD STATS -->
+
+
+<div class="dashboard-stats">
+
+
+<div class="dashboard-stat">
+
+<span>
+XP
+</span>
+
+<strong id="xpValue">
+0
+</strong>
+
+</div>
+
+
+<div class="dashboard-stat">
+
+<span>
+STREAK
+</span>
+
+<strong>
+🔥 <span id="streakValue">1</span>
+</strong>
+
+</div>
+
+
+<div class="dashboard-stat">
+
+<span>
+COMPLETED
+</span>
+
+<strong id="completedValue">
+0 / 6
+</strong>
+
+</div>
+
+
+<div class="dashboard-stat">
+
+<span>
+PROGRESS
+</span>
+
+<strong id="progressValue">
+0%
+</strong>
+
+</div>
+
+
+</div>
+
+
+
+<!-- COURSE PROGRESS -->
+
+
+<div class="course-progress">
+
+
+<div>
+
+<strong>
+A1 Course Progress
+</strong>
+
+
+<span id="progressText">
+0% complete
+</span>
+
+</div>
+
+
+<div class="big-progress">
+
+<div
+  id="courseProgress"
+  class="big-progress-fill"
+></div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- LESSON LIST -->
+
+
+<div class="lessons-section">
+
+
+<div class="lessons-heading">
+
+
+<div>
+
+<span>
+BEGINNER
+</span>
+
+
+<h2>
+A1 Learning Path
+</h2>
+
+</div>
+
+
+<span class="lesson-count">
+6 Lessons
+</span>
+
+</div>
+
+
+
+<div class="lesson-list">
+
+
+<div
+  class="course-lesson active"
+  onclick="openLesson(1)"
+>
+
+<div class="lesson-number">
+01
+</div>
+
+
+<div class="lesson-info">
+
+<span>
+LESSON 01
+</span>
+
+
+<h3>
+Greetings
+</h3>
+
+
+<p>
+Hallo, Guten Morgen, Guten Abend
+</p>
+
+</div>
+
+
+<div class="lesson-status">
+START
+</div>
+
+</div>
+
+
+
+<div
+  class="course-lesson"
+  onclick="openLesson(2)"
+>
+
+<div class="lesson-number">
+02
+</div>
+
+
+<div class="lesson-info">
+
+<span>
+LESSON 02
+</span>
+
+
+<h3>
+Introducing Yourself
+</h3>
+
+
+<p>
+Name, age and where you're from
+</p>
+
+</div>
+
+
+<div class="lesson-status locked">
+LOCKED
+</div>
+
+</div>
+
+
+
+<div
+  class="course-lesson"
+  onclick="openLesson(3)"
+>
+
+<div class="lesson-number">
+03
+</div>
+
+
+<div class="lesson-info">
+
+<span>
+LESSON 03
+</span>
+
+
+<h3>
+Numbers
+</h3>
+
+
+<p>
+Learn German numbers 0–20
+</p>
+
+</div>
+
+
+<div class="lesson-status locked">
+LOCKED
+</div>
+
+</div>
+
+
+
+<div
+  class="course-lesson"
+  onclick="openLesson(4)"
+>
+
+<div class="lesson-number">
+04
+</div>
+
+
+<div class="lesson-info">
+
+<span>
+LESSON 04
+</span>
+
+
+<h3>
+Countries
+</h3>
+
+
+<p>
+Countries, nationalities and languages
+</p>
+
+</div>
+
+
+<div class="lesson-status locked">
+LOCKED
+</div>
+
+</div>
+
+
+
+<div
+  class="course-lesson"
+  onclick="openLesson(5)"
+>
+
+<div class="lesson-number">
+05
+</div>
+
+
+<div class="lesson-info">
+
+<span>
+LESSON 05
+</span>
+
+
+<h3>
+Family
+</h3>
+
+
+<p>
+Learn words for family members
+</p>
+
+</div>
+
+
+<div class="lesson-status locked">
+LOCKED
+</div>
+
+</div>
+
+
+
+<div
+  class="course-lesson"
+  onclick="openLesson(6)"
+>
+
+<div class="lesson-number">
+06
+</div>
+
+
+<div class="lesson-info">
+
+<span>
+LESSON 06
+</span>
+
+
+<h3>
+Everyday German
+</h3>
+
+
+<p>
+Useful German for daily life
+</p>
+
+</div>
+
+
+<div class="lesson-status locked">
+LOCKED
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     LESSON PLAYER
+================================================== -->
+
+<section
+  id="lessonPlayer"
+  class="lesson-player hidden"
+>
+
+
+<div class="lesson-player-container">
+
+
+<!-- TOP -->
+
+
+<div class="lesson-player-top">
+
+
+<button
+  class="exit-lesson"
+  onclick="closeLesson()"
+>
+
+← Exit
+
+</button>
+
+
+<div class="lesson-title">
+
+<span>
+A1 · LESSON 01
+</span>
+
+<strong id="lessonTitle">
+Greetings
+</strong>
+
+</div>
+
+
+<div class="lesson-xp">
+⚡ <span id="lessonXP">0</span> XP
+</div>
+
+
+</div>
+
+
+
+<!-- PROGRESS -->
+
+
+<div class="lesson-progress-area">
+
+
+<div class="lesson-progress-track">
+
+<div
+  id="lessonProgress"
+  class="lesson-progress-fill"
+></div>
+
+</div>
+
+
+<div class="question-counter">
+
+<span id="questionNumber">
+1
+</span>
+/
+<span id="totalQuestions">
+5
+</span>
+
+</div>
+
+
+</div>
+
+
+
+<!-- QUESTION -->
+
+
+<div class="interactive-question">
+
+
+<span
+  id="questionType"
+  class="question-type"
+>
+TRANSLATE
+</span>
+
+
+<h1 id="questionText">
+What does "Hallo" mean?
+</h1>
+
+
+<button
+  id="questionAudio"
+  class="audio-large"
+  onclick="playCurrentAudio()"
+>
+
+🔊
+
+</button>
+
+
+<div
+  id="answerGrid"
+  class="answer-grid"
+>
+</div>
+
+
+<div
+  id="feedback"
+  class="answer-feedback hidden"
+>
+
+<div id="feedbackIcon">
+✓
+</div>
+
+
+<div>
+
+<strong id="feedbackTitle">
+Correct!
+</strong>
+
+
+<p id="feedbackText">
+Great job!
+</p>
+
+</div>
+
+</div>
+
+
+<button
+  id="nextButton"
+  class="next-question hidden"
+  onclick="nextQuestion()"
+>
+
+Continue →
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     RESULT SCREEN
+================================================== -->
+
+<section
+  id="resultScreen"
+  class="result-screen hidden"
+>
+
+
+<div class="result-card">
+
+
+<div class="result-icon">
+🎉
+</div>
+
+
+<span class="result-label">
+LESSON COMPLETE
+</span>
+
+
+<h1>
+Great work!
+</h1>
+
+
+<p>
+You've completed
+<strong>Greetings</strong>.
+</p>
+
+
+<div class="result-score">
+
+
+<div>
+
+<strong id="finalScore">
+0/5
+</strong>
+
+<span>
+Correct answers
+</span>
+
+</div>
+
+
+<div>
+
+<strong id="finalXP">
++0 XP
+</strong>
+
+<span>
+XP earned
+</span>
+
+</div>
+
+</div>
+
+
+<div class="result-actions">
+
+
+<button
+  class="primary-btn"
+  onclick="returnToDashboard()"
+>
+
+Back to A1 →
+
+</button>
+
+
+<button
+  class="secondary-btn"
+  onclick="restartLesson()"
+>
+
+Try Again
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+
+<a href="#" class="logo">
+
+<span class="logo-box">
+D
+</span>
+
+
+<span>
+Deutsch<span class="red">.</span>
+</span>
+
+</a>
+
+
+<p>
+Learn German. Interactively.
+</p>
+
+
+<span class="copyright">
+© 2026 Deutsch.
+</span>
+
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
