@@ -1185,3 +1185,589 @@ function showMessage(message) {
   );
 
 }
+/* ==================================================
+   PART 4 — LESSON 2
+   INTRODUCING YOURSELF
+================================================== */
+
+
+const introducingLesson = [
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "Ich bin Rahul." mean?',
+
+    audio:
+      "Ich bin Rahul.",
+
+    answers: [
+      "I am Rahul.",
+      "My name is Germany.",
+      "I live in Germany.",
+      "I speak German."
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Ich bin Rahul" means "I am Rahul."'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "Ich heiße Rahul." mean?',
+
+    audio:
+      "Ich heiße Rahul.",
+
+    answers: [
+      "I am 17 years old.",
+      "My name is Rahul.",
+      "I live in India.",
+      "I like German."
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Ich heiße Rahul" means "My name is Rahul."'
+  },
+
+
+  {
+    type: "CHOOSE",
+
+    question:
+      'How do you say "My name is Rahul" in German?',
+
+    audio:
+      "Ich heiße Rahul.",
+
+    answers: [
+      "Ich komme Rahul.",
+      "Ich bin Deutschland.",
+      "Ich heiße Rahul.",
+      "Ich wohne Rahul."
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Ich heiße..." is commonly used to introduce your name.'
+  },
+
+
+  {
+    type: "CHOOSE",
+
+    question:
+      'What does "Ich komme aus Indien." mean?',
+
+    audio:
+      "Ich komme aus Indien.",
+
+    answers: [
+      "I live in Germany.",
+      "I come from India.",
+      "I speak German.",
+      "I am German."
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Ich komme aus Indien" means "I come from India."'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'How do you say "I live in India" in German?',
+
+    audio:
+      "Ich wohne in Indien.",
+
+    answers: [
+      "Ich wohne in Indien.",
+      "Ich heiße Indien.",
+      "Ich komme Rahul.",
+      "Ich bin Indien."
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Ich wohne in Indien" means "I live in India."'
+  }
+
+];
+
+
+let lesson2CurrentQuestion = 0;
+
+let lesson2Score = 0;
+
+let lesson2XP = 0;
+
+
+/* ==================================================
+   OPEN LESSON 2
+================================================== */
+
+function startLesson2() {
+
+  lesson2CurrentQuestion = 0;
+
+  lesson2Score = 0;
+
+  lesson2XP = 0;
+
+
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson2Player")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson2Result")
+    .classList.add("hidden");
+
+
+  loadLesson2Question();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   LOAD LESSON 2 QUESTION
+================================================== */
+
+function loadLesson2Question() {
+
+  const question =
+    introducingLesson[
+      lesson2CurrentQuestion
+    ];
+
+
+  document
+    .getElementById("lesson2QuestionType")
+    .textContent =
+    question.type;
+
+
+  document
+    .getElementById("lesson2QuestionText")
+    .textContent =
+    question.question;
+
+
+  document
+    .getElementById("lesson2QuestionNumber")
+    .textContent =
+    lesson2CurrentQuestion + 1;
+
+
+  document
+    .getElementById("lesson2TotalQuestions")
+    .textContent =
+    introducingLesson.length;
+
+
+  const percentage =
+
+    (
+      (lesson2CurrentQuestion + 1)
+      /
+      introducingLesson.length
+    ) * 100;
+
+
+  document
+    .getElementById("lesson2Progress")
+    .style.width =
+    percentage + "%";
+
+
+  document
+    .getElementById("lesson2XP")
+    .textContent =
+    lesson2XP;
+
+
+  const grid =
+    document.getElementById(
+      "lesson2AnswerGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  question.answers.forEach(
+
+    function(answer, index) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "answer-option";
+
+
+      button.textContent =
+        answer;
+
+
+      button.onclick = function() {
+
+        selectLesson2Answer(
+          index,
+          button
+        );
+
+      };
+
+
+      grid.appendChild(button);
+
+    }
+
+  );
+
+
+  document
+    .getElementById("lesson2Feedback")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson2NextButton")
+    .classList.add("hidden");
+
+}
+
+
+/* ==================================================
+   SELECT ANSWER
+================================================== */
+
+function selectLesson2Answer(
+  selected,
+  button
+) {
+
+  const question =
+    introducingLesson[
+      lesson2CurrentQuestion
+    ];
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#lesson2AnswerGrid .answer-option"
+    );
+
+
+  buttons.forEach(
+
+    function(btn) {
+
+      btn.disabled = true;
+
+    }
+
+  );
+
+
+  const correct =
+    selected === question.correct;
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    lesson2Score++;
+
+    lesson2XP += 10;
+
+
+    document
+      .getElementById("lesson2FeedbackIcon")
+      .textContent =
+      "✓";
+
+
+    document
+      .getElementById("lesson2FeedbackTitle")
+      .textContent =
+      "Correct! 🎉";
+
+
+    document
+      .getElementById("lesson2FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    buttons[
+      question.correct
+    ].classList.add(
+      "correct"
+    );
+
+
+    document
+      .getElementById("lesson2FeedbackIcon")
+      .textContent =
+      "✕";
+
+
+    document
+      .getElementById("lesson2FeedbackTitle")
+      .textContent =
+      "Not quite";
+
+
+    document
+      .getElementById("lesson2FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+
+  document
+    .getElementById("lesson2XP")
+    .textContent =
+    lesson2XP;
+
+
+  document
+    .getElementById("lesson2Feedback")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("lesson2NextButton")
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* ==================================================
+   NEXT QUESTION
+================================================== */
+
+function nextLesson2Question() {
+
+  lesson2CurrentQuestion++;
+
+
+  if (
+    lesson2CurrentQuestion >=
+    introducingLesson.length
+  ) {
+
+    finishLesson2();
+
+    return;
+
+  }
+
+
+  loadLesson2Question();
+
+}
+
+
+/* ==================================================
+   FINISH LESSON 2
+================================================== */
+
+function finishLesson2() {
+
+  const lessonNumber = 2;
+
+
+  if (
+    !userData.completedLessons
+      .includes(lessonNumber)
+  ) {
+
+    userData.completedLessons.push(
+      lessonNumber
+    );
+
+    userData.completed++;
+
+    userData.xp += lesson2XP;
+
+    saveProgress();
+
+  }
+
+
+  document
+    .getElementById("lesson2Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson2Result")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson2FinalScore")
+    .textContent =
+
+    lesson2Score +
+    "/" +
+    introducingLesson.length;
+
+
+  document
+    .getElementById("lesson2FinalXP")
+    .textContent =
+
+    "+" +
+    lesson2XP +
+    " XP";
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   CLOSE LESSON 2
+================================================== */
+
+function closeLesson2() {
+
+  document
+    .getElementById("lesson2Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+}
+
+
+/* ==================================================
+   RETURN FROM LESSON 2
+================================================== */
+
+function returnFromLesson2() {
+
+  document
+    .getElementById("lesson2Result")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   RESTART LESSON 2
+================================================== */
+
+function restartLesson2() {
+
+  document
+    .getElementById("lesson2Result")
+    .classList.add("hidden");
+
+
+  startLesson2();
+
+}
+
+
+/* ==================================================
+   LESSON 2 AUDIO
+================================================== */
+
+function playLesson2Audio() {
+
+  const question =
+    introducingLesson[
+      lesson2CurrentQuestion
+    ];
+
+
+  speakGerman(
+    question.audio
+  );
+
+}
