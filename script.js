@@ -3077,3 +3077,650 @@ openLesson = function(number) {
   previousOpenLesson4(number);
 
 };
+/* ==================================================
+   PART 7 — LESSON 5
+   FAMILY & POSSESSIVES
+================================================== */
+
+
+const familyLesson = [
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Mutter" mean?',
+
+    audio:
+      "Mutter",
+
+    answers: [
+      "Father",
+      "Mother",
+      "Sister",
+      "Daughter"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Mutter" means mother.'
+  },
+
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Vater" mean?',
+
+    audio:
+      "Vater",
+
+    answers: [
+      "Brother",
+      "Father",
+      "Son",
+      "Grandfather"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Vater" means father.'
+  },
+
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Schwester" mean?',
+
+    audio:
+      "Schwester",
+
+    answers: [
+      "Sister",
+      "Mother",
+      "Aunt",
+      "Cousin"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Schwester" means sister.'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'Which one means "my father"?',
+
+    audio:
+      "mein Vater",
+
+    answers: [
+      "meine Vater",
+      "mein Vater",
+      "meinen Vater",
+      "meiner Vater"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Mein Vater" means "my father".'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'Which one means "my mother"?',
+
+    audio:
+      "meine Mutter",
+
+    answers: [
+      "mein Mutter",
+      "meinen Mutter",
+      "meine Mutter",
+      "meiner Mutter"
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Meine Mutter" means "my mother".'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "Das ist meine Schwester." mean?',
+
+    audio:
+      "Das ist meine Schwester.",
+
+    answers: [
+      "This is my brother.",
+      "This is my mother.",
+      "This is my sister.",
+      "This is my father."
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Das ist meine Schwester" means "This is my sister."'
+  }
+
+];
+
+
+let lesson5CurrentQuestion = 0;
+
+let lesson5Score = 0;
+
+let lesson5XP = 0;
+
+
+/* ==================================================
+   START LESSON 5
+================================================== */
+
+function startLesson5() {
+
+  lesson5CurrentQuestion = 0;
+
+  lesson5Score = 0;
+
+  lesson5XP = 0;
+
+
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson5Player")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson5Result")
+    .classList.add("hidden");
+
+
+  loadLesson5Question();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   LOAD QUESTION
+================================================== */
+
+function loadLesson5Question() {
+
+  const question =
+    familyLesson[
+      lesson5CurrentQuestion
+    ];
+
+
+  document
+    .getElementById("lesson5QuestionType")
+    .textContent =
+    question.type;
+
+
+  document
+    .getElementById("lesson5QuestionText")
+    .textContent =
+    question.question;
+
+
+  document
+    .getElementById("lesson5QuestionNumber")
+    .textContent =
+    lesson5CurrentQuestion + 1;
+
+
+  document
+    .getElementById("lesson5TotalQuestions")
+    .textContent =
+    familyLesson.length;
+
+
+  const percentage =
+
+    (
+      (lesson5CurrentQuestion + 1)
+      /
+      familyLesson.length
+    ) * 100;
+
+
+  document
+    .getElementById("lesson5Progress")
+    .style.width =
+    percentage + "%";
+
+
+  document
+    .getElementById("lesson5XP")
+    .textContent =
+    lesson5XP;
+
+
+  const grid =
+    document.getElementById(
+      "lesson5AnswerGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  question.answers.forEach(
+
+    function(answer, index) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "answer-option";
+
+
+      button.textContent =
+        answer;
+
+
+      button.onclick = function() {
+
+        selectLesson5Answer(
+          index,
+          button
+        );
+
+      };
+
+
+      grid.appendChild(button);
+
+    }
+
+  );
+
+
+  document
+    .getElementById("lesson5Feedback")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson5NextButton")
+    .classList.add("hidden");
+
+}
+
+
+/* ==================================================
+   SELECT ANSWER
+================================================== */
+
+function selectLesson5Answer(
+  selected,
+  button
+) {
+
+  const question =
+    familyLesson[
+      lesson5CurrentQuestion
+    ];
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#lesson5AnswerGrid .answer-option"
+    );
+
+
+  buttons.forEach(
+
+    function(btn) {
+
+      btn.disabled = true;
+
+    }
+
+  );
+
+
+  const correct =
+    selected === question.correct;
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    lesson5Score++;
+
+    lesson5XP += 10;
+
+
+    document
+      .getElementById("lesson5FeedbackIcon")
+      .textContent =
+      "✓";
+
+
+    document
+      .getElementById("lesson5FeedbackTitle")
+      .textContent =
+      "Correct! 🎉";
+
+
+    document
+      .getElementById("lesson5FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    buttons[
+      question.correct
+    ].classList.add(
+      "correct"
+    );
+
+
+    document
+      .getElementById("lesson5FeedbackIcon")
+      .textContent =
+      "✕";
+
+
+    document
+      .getElementById("lesson5FeedbackTitle")
+      .textContent =
+      "Not quite";
+
+
+    document
+      .getElementById("lesson5FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+
+  document
+    .getElementById("lesson5XP")
+    .textContent =
+    lesson5XP;
+
+
+  document
+    .getElementById("lesson5Feedback")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("lesson5NextButton")
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* ==================================================
+   NEXT QUESTION
+================================================== */
+
+function nextLesson5Question() {
+
+  lesson5CurrentQuestion++;
+
+
+  if (
+    lesson5CurrentQuestion >=
+    familyLesson.length
+  ) {
+
+    finishLesson5();
+
+    return;
+
+  }
+
+
+  loadLesson5Question();
+
+}
+
+
+/* ==================================================
+   FINISH LESSON 5
+================================================== */
+
+function finishLesson5() {
+
+  const lessonNumber = 5;
+
+
+  if (
+    !userData.completedLessons
+      .includes(lessonNumber)
+  ) {
+
+    userData.completedLessons.push(
+      lessonNumber
+    );
+
+    userData.completed++;
+
+    userData.xp += lesson5XP;
+
+    saveProgress();
+
+  }
+
+
+  document
+    .getElementById("lesson5Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson5Result")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson5FinalScore")
+    .textContent =
+
+    lesson5Score +
+    "/" +
+    familyLesson.length;
+
+
+  document
+    .getElementById("lesson5FinalXP")
+    .textContent =
+
+    "+" +
+    lesson5XP +
+    " XP";
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   CLOSE LESSON 5
+================================================== */
+
+function closeLesson5() {
+
+  document
+    .getElementById("lesson5Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+}
+
+
+/* ==================================================
+   RETURN TO DASHBOARD
+================================================== */
+
+function returnFromLesson5() {
+
+  document
+    .getElementById("lesson5Result")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   RESTART LESSON 5
+================================================== */
+
+function restartLesson5() {
+
+  document
+    .getElementById("lesson5Result")
+    .classList.add("hidden");
+
+
+  startLesson5();
+
+}
+
+
+/* ==================================================
+   LESSON 5 AUDIO
+================================================== */
+
+function playLesson5Audio() {
+
+  const question =
+    familyLesson[
+      lesson5CurrentQuestion
+    ];
+
+
+  speakGerman(
+    question.audio
+  );
+
+}
+
+
+/* ==================================================
+   CONNECT LESSON 5
+================================================== */
+
+const previousOpenLesson5 =
+  openLesson;
+
+
+openLesson = function(number) {
+
+  if (number === 5) {
+
+    if (
+      !userData.completedLessons
+        .includes(4)
+    ) {
+
+      showMessage(
+        "Complete Lesson 4 first 🔒"
+      );
+
+      return;
+
+    }
+
+
+    startLesson5();
+
+    return;
+
+  }
+
+
+  previousOpenLesson5(number);
+
+};
