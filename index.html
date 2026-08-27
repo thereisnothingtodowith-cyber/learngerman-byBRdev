@@ -1549,4 +1549,212 @@ Learn German. Interactively.
   </div>
 
 </section>
+<!-- ==================================================
+     PART 5 — LESSON 3
+     GERMAN NUMBERS 0–20
+================================================== -->
+
+<section
+  id="lesson3Player"
+  class="lesson-player hidden"
+>
+
+  <div class="lesson-player-container">
+
+    <div class="lesson-player-top">
+
+      <button
+        class="exit-lesson"
+        onclick="closeLesson3()"
+      >
+        ← Exit
+      </button>
+
+      <div class="lesson-title">
+
+        <span>A1 · LESSON 03</span>
+
+        <strong>German Numbers</strong>
+
+      </div>
+
+      <div class="lesson-xp">
+        ⚡ <span id="lesson3XP">0</span> XP
+      </div>
+
+    </div>
+
+
+    <div class="lesson-progress-area">
+
+      <div class="lesson-progress-track">
+
+        <div
+          id="lesson3Progress"
+          class="lesson-progress-fill"
+        ></div>
+
+      </div>
+
+      <div class="question-counter">
+
+        <span id="lesson3QuestionNumber">1</span>
+        /
+        <span id="lesson3TotalQuestions">5</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="interactive-question">
+
+      <span
+        id="lesson3QuestionType"
+        class="question-type"
+      >
+        TRANSLATE
+      </span>
+
+
+      <h1 id="lesson3QuestionText">
+        What does "eins" mean?
+      </h1>
+
+
+      <button
+        class="audio-large"
+        onclick="playLesson3Audio()"
+      >
+        🔊
+      </button>
+
+
+      <div
+        id="lesson3AnswerGrid"
+        class="answer-grid"
+      >
+      </div>
+
+
+      <div
+        id="lesson3Feedback"
+        class="answer-feedback hidden"
+      >
+
+        <div id="lesson3FeedbackIcon">
+          ✓
+        </div>
+
+        <div>
+
+          <strong id="lesson3FeedbackTitle">
+            Correct!
+          </strong>
+
+          <p id="lesson3FeedbackText">
+            Great job!
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="lesson3NextButton"
+        class="next-question hidden"
+        onclick="nextLesson3Question()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     PART 5 — LESSON 3 RESULT
+================================================== -->
+
+<section
+  id="lesson3Result"
+  class="result-screen hidden"
+>
+
+  <div class="result-card">
+
+    <div class="result-icon">
+      🔢
+    </div>
+
+    <span class="result-label">
+      LESSON COMPLETE
+    </span>
+
+    <h1>
+      Ausgezeichnet!
+    </h1>
+
+    <p>
+      You've completed
+      <strong>German Numbers</strong>.
+    </p>
+
+
+    <div class="result-score">
+
+      <div>
+
+        <strong id="lesson3FinalScore">
+          0/5
+        </strong>
+
+        <span>
+          Correct answers
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong id="lesson3FinalXP">
+          +0 XP
+        </strong>
+
+        <span>
+          XP earned
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="result-actions">
+
+      <button
+        class="primary-btn"
+        onclick="returnFromLesson3()"
+      >
+        Back to A1 →
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="restartLesson3()"
+      >
+        Try Again
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+  
 </html>
