@@ -2430,3 +2430,650 @@ openLesson = function(number) {
   previousOpenLesson(number);
 
 };
+/* ==================================================
+   PART 6 — LESSON 4
+   COUNTRIES, NATIONALITIES & LANGUAGES
+================================================== */
+
+
+const countriesLesson = [
+
+  {
+    type: "CHOOSE",
+
+    question:
+      'Which country is "Deutschland"?',
+
+    audio:
+      "Deutschland",
+
+    answers: [
+      "Germany",
+      "France",
+      "Italy",
+      "Spain"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Deutschland" is the German name for Germany.'
+  },
+
+
+  {
+    type: "CHOOSE",
+
+    question:
+      'What is "Indien" in English?',
+
+    audio:
+      "Indien",
+
+    answers: [
+      "Indonesia",
+      "India",
+      "Ireland",
+      "Iceland"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Indien" means India.'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "Ich komme aus Deutschland." mean?',
+
+    audio:
+      "Ich komme aus Deutschland.",
+
+    answers: [
+      "I live in Germany.",
+      "I speak German.",
+      "I come from Germany.",
+      "I am German."
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Ich komme aus Deutschland" means "I come from Germany."'
+  },
+
+
+  {
+    type: "CHOOSE",
+
+    question:
+      'What language is mainly spoken in Germany?',
+
+    audio:
+      "Deutsch",
+
+    answers: [
+      "Französisch",
+      "Deutsch",
+      "Spanisch",
+      "Italienisch"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Deutsch" means German.'
+  },
+
+
+  {
+    type: "CHOOSE",
+
+    question:
+      'What is "Englisch" in English?',
+
+    audio:
+      "Englisch",
+
+    answers: [
+      "English",
+      "German",
+      "French",
+      "Spanish"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Englisch" means English.'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "Ich spreche Deutsch." mean?',
+
+    audio:
+      "Ich spreche Deutsch.",
+
+    answers: [
+      "I learn Germany.",
+      "I speak German.",
+      "I come from Germany.",
+      "I live in Germany."
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Ich spreche Deutsch" means "I speak German."'
+  }
+
+];
+
+
+let lesson4CurrentQuestion = 0;
+
+let lesson4Score = 0;
+
+let lesson4XP = 0;
+
+
+/* ==================================================
+   START LESSON 4
+================================================== */
+
+function startLesson4() {
+
+  lesson4CurrentQuestion = 0;
+
+  lesson4Score = 0;
+
+  lesson4XP = 0;
+
+
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson4Player")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson4Result")
+    .classList.add("hidden");
+
+
+  loadLesson4Question();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   LOAD LESSON 4 QUESTION
+================================================== */
+
+function loadLesson4Question() {
+
+  const question =
+    countriesLesson[
+      lesson4CurrentQuestion
+    ];
+
+
+  document
+    .getElementById("lesson4QuestionType")
+    .textContent =
+    question.type;
+
+
+  document
+    .getElementById("lesson4QuestionText")
+    .textContent =
+    question.question;
+
+
+  document
+    .getElementById("lesson4QuestionNumber")
+    .textContent =
+    lesson4CurrentQuestion + 1;
+
+
+  document
+    .getElementById("lesson4TotalQuestions")
+    .textContent =
+    countriesLesson.length;
+
+
+  const percentage =
+
+    (
+      (lesson4CurrentQuestion + 1)
+      /
+      countriesLesson.length
+    ) * 100;
+
+
+  document
+    .getElementById("lesson4Progress")
+    .style.width =
+    percentage + "%";
+
+
+  document
+    .getElementById("lesson4XP")
+    .textContent =
+    lesson4XP;
+
+
+  const grid =
+    document.getElementById(
+      "lesson4AnswerGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  question.answers.forEach(
+
+    function(answer, index) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "answer-option";
+
+
+      button.textContent =
+        answer;
+
+
+      button.onclick = function() {
+
+        selectLesson4Answer(
+          index,
+          button
+        );
+
+      };
+
+
+      grid.appendChild(button);
+
+    }
+
+  );
+
+
+  document
+    .getElementById("lesson4Feedback")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson4NextButton")
+    .classList.add("hidden");
+
+}
+
+
+/* ==================================================
+   SELECT ANSWER
+================================================== */
+
+function selectLesson4Answer(
+  selected,
+  button
+) {
+
+  const question =
+    countriesLesson[
+      lesson4CurrentQuestion
+    ];
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#lesson4AnswerGrid .answer-option"
+    );
+
+
+  buttons.forEach(
+
+    function(btn) {
+
+      btn.disabled = true;
+
+    }
+
+  );
+
+
+  const correct =
+    selected === question.correct;
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    lesson4Score++;
+
+    lesson4XP += 10;
+
+
+    document
+      .getElementById("lesson4FeedbackIcon")
+      .textContent =
+      "✓";
+
+
+    document
+      .getElementById("lesson4FeedbackTitle")
+      .textContent =
+      "Correct! 🎉";
+
+
+    document
+      .getElementById("lesson4FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    buttons[
+      question.correct
+    ].classList.add(
+      "correct"
+    );
+
+
+    document
+      .getElementById("lesson4FeedbackIcon")
+      .textContent =
+      "✕";
+
+
+    document
+      .getElementById("lesson4FeedbackTitle")
+      .textContent =
+      "Not quite";
+
+
+    document
+      .getElementById("lesson4FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+
+  document
+    .getElementById("lesson4XP")
+    .textContent =
+    lesson4XP;
+
+
+  document
+    .getElementById("lesson4Feedback")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("lesson4NextButton")
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* ==================================================
+   NEXT QUESTION
+================================================== */
+
+function nextLesson4Question() {
+
+  lesson4CurrentQuestion++;
+
+
+  if (
+    lesson4CurrentQuestion >=
+    countriesLesson.length
+  ) {
+
+    finishLesson4();
+
+    return;
+
+  }
+
+
+  loadLesson4Question();
+
+}
+
+
+/* ==================================================
+   FINISH LESSON 4
+================================================== */
+
+function finishLesson4() {
+
+  const lessonNumber = 4;
+
+
+  if (
+    !userData.completedLessons
+      .includes(lessonNumber)
+  ) {
+
+    userData.completedLessons.push(
+      lessonNumber
+    );
+
+    userData.completed++;
+
+    userData.xp += lesson4XP;
+
+    saveProgress();
+
+  }
+
+
+  document
+    .getElementById("lesson4Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson4Result")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson4FinalScore")
+    .textContent =
+
+    lesson4Score +
+    "/" +
+    countriesLesson.length;
+
+
+  document
+    .getElementById("lesson4FinalXP")
+    .textContent =
+
+    "+" +
+    lesson4XP +
+    " XP";
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   CLOSE LESSON 4
+================================================== */
+
+function closeLesson4() {
+
+  document
+    .getElementById("lesson4Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+}
+
+
+/* ==================================================
+   RETURN TO DASHBOARD
+================================================== */
+
+function returnFromLesson4() {
+
+  document
+    .getElementById("lesson4Result")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   RESTART LESSON 4
+================================================== */
+
+function restartLesson4() {
+
+  document
+    .getElementById("lesson4Result")
+    .classList.add("hidden");
+
+
+  startLesson4();
+
+}
+
+
+/* ==================================================
+   LESSON 4 AUDIO
+================================================== */
+
+function playLesson4Audio() {
+
+  const question =
+    countriesLesson[
+      lesson4CurrentQuestion
+    ];
+
+
+  speakGerman(
+    question.audio
+  );
+
+}
+
+
+/* ==================================================
+   CONNECT LESSON 4
+================================================== */
+
+const previousOpenLesson4 =
+  openLesson;
+
+
+openLesson = function(number) {
+
+  if (number === 4) {
+
+    if (
+      !userData.completedLessons
+        .includes(3)
+    ) {
+
+      showMessage(
+        "Complete Lesson 3 first 🔒"
+      );
+
+      return;
+
+    }
+
+
+    startLesson4();
+
+    return;
+
+  }
+
+
+  previousOpenLesson4(number);
+
+};
