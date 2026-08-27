@@ -984,3 +984,432 @@ footer p {
   }
 
 }
+/* ==================================================
+   A1 DASHBOARD
+================================================== */
+
+.hidden {
+  display: none !important;
+}
+
+
+.dashboard {
+  min-height: 100vh;
+
+  background: #f7f6f2;
+
+  padding: 70px 7%;
+}
+
+
+.dashboard-container {
+  max-width: 1100px;
+
+  margin: auto;
+}
+
+
+.dashboard-header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 40px;
+}
+
+
+.dashboard-label {
+
+  color: #d92b2b;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+
+.dashboard-header h1 {
+
+  margin-top: 8px;
+
+  font-size: 48px;
+
+  letter-spacing: -2px;
+}
+
+
+.dashboard-header p {
+
+  margin-top: 8px;
+
+  color: #77736c;
+
+}
+
+
+.back-btn {
+
+  padding: 12px 17px;
+
+  background: white;
+
+  border: 1px solid #dedbd4;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+
+/* ================= STATS ================= */
+
+
+.dashboard-stats {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+
+.dashboard-stat {
+
+  background: white;
+
+  border: 1px solid #dedbd4;
+
+  border-radius: 13px;
+
+  padding: 22px;
+}
+
+
+.dashboard-stat span {
+
+  display: block;
+
+  color: #858078;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.dashboard-stat strong {
+
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 25px;
+}
+
+
+/* ================= COURSE PROGRESS ================= */
+
+
+.course-progress {
+
+  background: #171717;
+
+  color: white;
+
+  border-radius: 15px;
+
+  padding: 25px;
+
+  margin-bottom: 35px;
+}
+
+
+.course-progress > div:first-child {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+
+.course-progress span {
+
+  color: #aaa8a3;
+
+  font-size: 12px;
+}
+
+
+.big-progress {
+
+  height: 8px;
+
+  margin-top: 18px;
+
+  background: #353535;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+
+.big-progress-fill {
+
+  width: 0%;
+
+  height: 100%;
+
+  background: #d92b2b;
+
+  transition: width 0.4s ease;
+}
+
+
+/* ================= LESSONS ================= */
+
+
+.lessons-section {
+
+  background: white;
+
+  border: 1px solid #dedbd4;
+
+  border-radius: 16px;
+
+  padding: 28px;
+}
+
+
+.lessons-heading {
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+
+.lessons-heading span:first-child {
+
+  color: #d92b2b;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.lessons-heading h2 {
+
+  margin-top: 6px;
+
+  font-size: 25px;
+}
+
+
+.lesson-count {
+
+  color: #88847c;
+
+  font-size: 12px;
+}
+
+
+.lesson-list {
+
+  display: grid;
+
+  gap: 10px;
+}
+
+
+.course-lesson {
+
+  display: grid;
+
+  grid-template-columns: 55px 1fr auto;
+
+  align-items: center;
+
+  gap: 17px;
+
+  padding: 18px;
+
+  border: 1px solid #e3e0d9;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.course-lesson:hover {
+
+  border-color: #171717;
+
+  transform: translateX(3px);
+}
+
+
+.course-lesson.active {
+
+  border-color: #d92b2b;
+
+  background: #fffafa;
+}
+
+
+.lesson-number {
+
+  width: 45px;
+
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #f1efea;
+
+  border-radius: 10px;
+
+  font-weight: 700;
+
+  font-size: 13px;
+}
+
+
+.lesson-info span {
+
+  color: #aaa69e;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.lesson-info h3 {
+
+  margin-top: 4px;
+
+  font-size: 16px;
+}
+
+
+.lesson-info p {
+
+  margin-top: 4px;
+
+  color: #858078;
+
+  font-size: 12px;
+}
+
+
+.lesson-status {
+
+  padding: 7px 10px;
+
+  background: #171717;
+
+  color: white;
+
+  border-radius: 7px;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+
+.lesson-status.locked {
+
+  background: #eeeae3;
+
+  color: #96928a;
+}
+
+
+/* ================= MOBILE ================= */
+
+
+@media (max-width: 700px) {
+
+  .dashboard {
+
+    padding: 50px 5%;
+  }
+
+
+  .dashboard-header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+
+  .dashboard-header h1 {
+
+    font-size: 40px;
+  }
+
+
+  .dashboard-stats {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .lessons-section {
+
+    padding: 18px;
+  }
+
+
+  .course-lesson {
+
+    grid-template-columns:
+      45px 1fr;
+
+    gap: 12px;
+  }
+
+
+  .lesson-status {
+
+    display: none;
+  }
+
+}
