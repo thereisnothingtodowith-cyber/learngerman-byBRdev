@@ -1342,5 +1342,211 @@ Learn German. Interactively.
 <script src="script.js"></script>
 
 </body>
+<!-- ==================================================
+     PART 4 — LESSON 2
+================================================== -->
 
+<section
+  id="lesson2Player"
+  class="lesson-player hidden"
+>
+
+  <div class="lesson-player-container">
+
+    <div class="lesson-player-top">
+
+      <button
+        class="exit-lesson"
+        onclick="closeLesson2()"
+      >
+        ← Exit
+      </button>
+
+      <div class="lesson-title">
+
+        <span>A1 · LESSON 02</span>
+
+        <strong>Introducing Yourself</strong>
+
+      </div>
+
+      <div class="lesson-xp">
+        ⚡ <span id="lesson2XP">0</span> XP
+      </div>
+
+    </div>
+
+
+    <div class="lesson-progress-area">
+
+      <div class="lesson-progress-track">
+
+        <div
+          id="lesson2Progress"
+          class="lesson-progress-fill"
+        ></div>
+
+      </div>
+
+      <div class="question-counter">
+
+        <span id="lesson2QuestionNumber">1</span>
+        /
+        <span id="lesson2TotalQuestions">5</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="interactive-question">
+
+      <span
+        id="lesson2QuestionType"
+        class="question-type"
+      >
+        TRANSLATE
+      </span>
+
+
+      <h1 id="lesson2QuestionText">
+        What does "Ich bin Rahul." mean?
+      </h1>
+
+
+      <button
+        id="lesson2Audio"
+        class="audio-large"
+        onclick="playLesson2Audio()"
+      >
+        🔊
+      </button>
+
+
+      <div
+        id="lesson2AnswerGrid"
+        class="answer-grid"
+      >
+      </div>
+
+
+      <div
+        id="lesson2Feedback"
+        class="answer-feedback hidden"
+      >
+
+        <div id="lesson2FeedbackIcon">
+          ✓
+        </div>
+
+        <div>
+
+          <strong id="lesson2FeedbackTitle">
+            Correct!
+          </strong>
+
+          <p id="lesson2FeedbackText">
+            Great job!
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="lesson2NextButton"
+        class="next-question hidden"
+        onclick="nextLesson2Question()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     PART 4 — LESSON 2 RESULT
+================================================== -->
+
+<section
+  id="lesson2Result"
+  class="result-screen hidden"
+>
+
+  <div class="result-card">
+
+    <div class="result-icon">
+      🎉
+    </div>
+
+    <span class="result-label">
+      LESSON COMPLETE
+    </span>
+
+    <h1>
+      Sehr gut!
+    </h1>
+
+    <p>
+      You've completed
+      <strong>Introducing Yourself</strong>.
+    </p>
+
+
+    <div class="result-score">
+
+      <div>
+
+        <strong id="lesson2FinalScore">
+          0/5
+        </strong>
+
+        <span>
+          Correct answers
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong id="lesson2FinalXP">
+          +0 XP
+        </strong>
+
+        <span>
+          XP earned
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="result-actions">
+
+      <button
+        class="primary-btn"
+        onclick="returnFromLesson2()"
+      >
+        Back to A1 →
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="restartLesson2()"
+      >
+        Try Again
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
 </html>
