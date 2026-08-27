@@ -1771,3 +1771,38 @@ function playLesson2Audio() {
   );
 
 }
+/* ==================================================
+   PART 4 — CONNECT LESSON 2
+================================================== */
+
+const originalOpenLesson = openLesson;
+
+
+openLesson = function(number) {
+
+  if (number === 2) {
+
+    if (
+      !userData.completedLessons
+        .includes(1)
+    ) {
+
+      showMessage(
+        "Complete Lesson 1 first 🔒"
+      );
+
+      return;
+
+    }
+
+
+    startLesson2();
+
+    return;
+
+  }
+
+
+  originalOpenLesson(number);
+
+};
