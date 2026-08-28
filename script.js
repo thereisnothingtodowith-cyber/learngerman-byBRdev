@@ -3724,3 +3724,650 @@ openLesson = function(number) {
   previousOpenLesson5(number);
 
 };
+/* ==================================================
+   PART 8 — LESSON 6
+   HOME, ROOMS & ARTICLES
+================================================== */
+
+
+const homeLesson = [
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Küche" mean?',
+
+    audio:
+      "Küche",
+
+    answers: [
+      "Bedroom",
+      "Kitchen",
+      "Bathroom",
+      "Living room"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Küche" means kitchen.'
+  },
+
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Schlafzimmer" mean?',
+
+    audio:
+      "Schlafzimmer",
+
+    answers: [
+      "Bedroom",
+      "Kitchen",
+      "Garden",
+      "Garage"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Schlafzimmer" means bedroom.'
+  },
+
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Badezimmer" mean?',
+
+    audio:
+      "Badezimmer",
+
+    answers: [
+      "Living room",
+      "Dining room",
+      "Bathroom",
+      "Balcony"
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Badezimmer" means bathroom.'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'Which article is used with "Tisch"?',
+
+    audio:
+      "der Tisch",
+
+    answers: [
+      "der",
+      "die",
+      "das",
+      "den"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Tisch" is masculine: der Tisch.'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'Which article is used with "Tür"?',
+
+    audio:
+      "die Tür",
+
+    answers: [
+      "der",
+      "die",
+      "das",
+      "den"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Tür" is feminine: die Tür.'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'Which article is used with "Fenster"?',
+
+    audio:
+      "das Fenster",
+
+    answers: [
+      "der",
+      "die",
+      "das",
+      "den"
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Fenster" is neuter: das Fenster.'
+  }
+
+];
+
+
+let lesson6CurrentQuestion = 0;
+
+let lesson6Score = 0;
+
+let lesson6XP = 0;
+
+
+/* ==================================================
+   START LESSON 6
+================================================== */
+
+function startLesson6() {
+
+  lesson6CurrentQuestion = 0;
+
+  lesson6Score = 0;
+
+  lesson6XP = 0;
+
+
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson6Player")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson6Result")
+    .classList.add("hidden");
+
+
+  loadLesson6Question();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   LOAD QUESTION
+================================================== */
+
+function loadLesson6Question() {
+
+  const question =
+    homeLesson[
+      lesson6CurrentQuestion
+    ];
+
+
+  document
+    .getElementById("lesson6QuestionType")
+    .textContent =
+    question.type;
+
+
+  document
+    .getElementById("lesson6QuestionText")
+    .textContent =
+    question.question;
+
+
+  document
+    .getElementById("lesson6QuestionNumber")
+    .textContent =
+    lesson6CurrentQuestion + 1;
+
+
+  document
+    .getElementById("lesson6TotalQuestions")
+    .textContent =
+    homeLesson.length;
+
+
+  const percentage =
+
+    (
+      (lesson6CurrentQuestion + 1)
+      /
+      homeLesson.length
+    ) * 100;
+
+
+  document
+    .getElementById("lesson6Progress")
+    .style.width =
+    percentage + "%";
+
+
+  document
+    .getElementById("lesson6XP")
+    .textContent =
+    lesson6XP;
+
+
+  const grid =
+    document.getElementById(
+      "lesson6AnswerGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  question.answers.forEach(
+
+    function(answer, index) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "answer-option";
+
+
+      button.textContent =
+        answer;
+
+
+      button.onclick = function() {
+
+        selectLesson6Answer(
+          index,
+          button
+        );
+
+      };
+
+
+      grid.appendChild(button);
+
+    }
+
+  );
+
+
+  document
+    .getElementById("lesson6Feedback")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson6NextButton")
+    .classList.add("hidden");
+
+}
+
+
+/* ==================================================
+   SELECT ANSWER
+================================================== */
+
+function selectLesson6Answer(
+  selected,
+  button
+) {
+
+  const question =
+    homeLesson[
+      lesson6CurrentQuestion
+    ];
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#lesson6AnswerGrid .answer-option"
+    );
+
+
+  buttons.forEach(
+
+    function(btn) {
+
+      btn.disabled = true;
+
+    }
+
+  );
+
+
+  const correct =
+    selected === question.correct;
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    lesson6Score++;
+
+    lesson6XP += 10;
+
+
+    document
+      .getElementById("lesson6FeedbackIcon")
+      .textContent =
+      "✓";
+
+
+    document
+      .getElementById("lesson6FeedbackTitle")
+      .textContent =
+      "Correct! 🎉";
+
+
+    document
+      .getElementById("lesson6FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    buttons[
+      question.correct
+    ].classList.add(
+      "correct"
+    );
+
+
+    document
+      .getElementById("lesson6FeedbackIcon")
+      .textContent =
+      "✕";
+
+
+    document
+      .getElementById("lesson6FeedbackTitle")
+      .textContent =
+      "Not quite";
+
+
+    document
+      .getElementById("lesson6FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+
+  document
+    .getElementById("lesson6XP")
+    .textContent =
+    lesson6XP;
+
+
+  document
+    .getElementById("lesson6Feedback")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("lesson6NextButton")
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* ==================================================
+   NEXT QUESTION
+================================================== */
+
+function nextLesson6Question() {
+
+  lesson6CurrentQuestion++;
+
+
+  if (
+    lesson6CurrentQuestion >=
+    homeLesson.length
+  ) {
+
+    finishLesson6();
+
+    return;
+
+  }
+
+
+  loadLesson6Question();
+
+}
+
+
+/* ==================================================
+   FINISH LESSON 6
+================================================== */
+
+function finishLesson6() {
+
+  const lessonNumber = 6;
+
+
+  if (
+    !userData.completedLessons
+      .includes(lessonNumber)
+  ) {
+
+    userData.completedLessons.push(
+      lessonNumber
+    );
+
+    userData.completed++;
+
+    userData.xp += lesson6XP;
+
+    saveProgress();
+
+  }
+
+
+  document
+    .getElementById("lesson6Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson6Result")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson6FinalScore")
+    .textContent =
+
+    lesson6Score +
+    "/" +
+    homeLesson.length;
+
+
+  document
+    .getElementById("lesson6FinalXP")
+    .textContent =
+
+    "+" +
+    lesson6XP +
+    " XP";
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   CLOSE LESSON 6
+================================================== */
+
+function closeLesson6() {
+
+  document
+    .getElementById("lesson6Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+}
+
+
+/* ==================================================
+   RETURN TO DASHBOARD
+================================================== */
+
+function returnFromLesson6() {
+
+  document
+    .getElementById("lesson6Result")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   RESTART LESSON 6
+================================================== */
+
+function restartLesson6() {
+
+  document
+    .getElementById("lesson6Result")
+    .classList.add("hidden");
+
+
+  startLesson6();
+
+}
+
+
+/* ==================================================
+   LESSON 6 AUDIO
+================================================== */
+
+function playLesson6Audio() {
+
+  const question =
+    homeLesson[
+      lesson6CurrentQuestion
+    ];
+
+
+  speakGerman(
+    question.audio
+  );
+
+}
+
+
+/* ==================================================
+   CONNECT LESSON 6
+================================================== */
+
+const previousOpenLesson6 =
+  openLesson;
+
+
+openLesson = function(number) {
+
+  if (number === 6) {
+
+    if (
+      !userData.completedLessons
+        .includes(5)
+    ) {
+
+      showMessage(
+        "Complete Lesson 5 first 🔒"
+      );
+
+      return;
+
+    }
+
+
+    startLesson6();
+
+    return;
+
+  }
+
+
+  previousOpenLesson6(number);
+
+};
