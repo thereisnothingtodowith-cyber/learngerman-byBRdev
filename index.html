@@ -2170,5 +2170,211 @@ Learn German. Interactively.
   </div>
 
 </section>
-  
+<!-- ==================================================
+     PART 8 — LESSON 6
+     HOME, ROOMS & ARTICLES
+================================================== -->
+
+<section
+  id="lesson6Player"
+  class="lesson-player hidden"
+>
+
+  <div class="lesson-player-container">
+
+    <div class="lesson-player-top">
+
+      <button
+        class="exit-lesson"
+        onclick="closeLesson6()"
+      >
+        ← Exit
+      </button>
+
+      <div class="lesson-title">
+
+        <span>A1 · LESSON 06</span>
+
+        <strong>Home & Rooms</strong>
+
+      </div>
+
+      <div class="lesson-xp">
+        ⚡ <span id="lesson6XP">0</span> XP
+      </div>
+
+    </div>
+
+
+    <div class="lesson-progress-area">
+
+      <div class="lesson-progress-track">
+
+        <div
+          id="lesson6Progress"
+          class="lesson-progress-fill"
+        ></div>
+
+      </div>
+
+      <div class="question-counter">
+
+        <span id="lesson6QuestionNumber">1</span>
+        /
+        <span id="lesson6TotalQuestions">6</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="interactive-question">
+
+      <span
+        id="lesson6QuestionType"
+        class="question-type"
+      >
+        VOCABULARY
+      </span>
+
+
+      <h1 id="lesson6QuestionText">
+        What does "Küche" mean?
+      </h1>
+
+
+      <button
+        class="audio-large"
+        onclick="playLesson6Audio()"
+      >
+        🔊
+      </button>
+
+
+      <div
+        id="lesson6AnswerGrid"
+        class="answer-grid"
+      >
+      </div>
+
+
+      <div
+        id="lesson6Feedback"
+        class="answer-feedback hidden"
+      >
+
+        <div id="lesson6FeedbackIcon">
+          ✓
+        </div>
+
+        <div>
+
+          <strong id="lesson6FeedbackTitle">
+            Correct!
+          </strong>
+
+          <p id="lesson6FeedbackText">
+            Great job!
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="lesson6NextButton"
+        class="next-question hidden"
+        onclick="nextLesson6Question()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     PART 8 — LESSON 6 RESULT
+================================================== -->
+
+<section
+  id="lesson6Result"
+  class="result-screen hidden"
+>
+
+  <div class="result-card">
+
+    <div class="result-icon">
+      🏠
+    </div>
+
+    <span class="result-label">
+      LESSON COMPLETE
+    </span>
+
+    <h1>
+      Großartig!
+    </h1>
+
+    <p>
+      You've completed
+      <strong>Home & Rooms</strong>.
+    </p>
+
+
+    <div class="result-score">
+
+      <div>
+
+        <strong id="lesson6FinalScore">
+          0/6
+        </strong>
+
+        <span>
+          Correct answers
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong id="lesson6FinalXP">
+          +0 XP
+        </strong>
+
+        <span>
+          XP earned
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="result-actions">
+
+      <button
+        class="primary-btn"
+        onclick="returnFromLesson6()"
+      >
+        Back to A1 →
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="restartLesson6()"
+      >
+        Try Again
+      </button>
+
+    </div>
+
+  </div>
+
+</section>  
 </html>
