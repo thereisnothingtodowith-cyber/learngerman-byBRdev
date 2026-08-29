@@ -4371,3 +4371,650 @@ openLesson = function(number) {
   previousOpenLesson6(number);
 
 };
+/* ==================================================
+   PART 9 — LESSON 7
+   FOOD, DRINKS & "ICH MÖCHTE..."
+================================================== */
+
+
+const foodLesson = [
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Brot" mean?',
+
+    audio:
+      "Brot",
+
+    answers: [
+      "Bread",
+      "Rice",
+      "Apple",
+      "Cheese"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Brot" means bread.'
+  },
+
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Wasser" mean?',
+
+    audio:
+      "Wasser",
+
+    answers: [
+      "Milk",
+      "Coffee",
+      "Water",
+      "Juice"
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Wasser" means water.'
+  },
+
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Apfel" mean?',
+
+    audio:
+      "Apfel",
+
+    answers: [
+      "Orange",
+      "Apple",
+      "Banana",
+      "Potato"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Apfel" means apple.'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'What does "Ich möchte Wasser." mean?',
+
+    audio:
+      "Ich möchte Wasser.",
+
+    answers: [
+      "I drink water.",
+      "I want water.",
+      "I have water.",
+      "I like water."
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Ich möchte Wasser" means "I would like water."'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'Which sentence means "I would like coffee"?',
+
+    audio:
+      "Ich möchte Kaffee.",
+
+    answers: [
+      "Ich trinke Kaffee.",
+      "Ich habe Kaffee.",
+      "Ich möchte Kaffee.",
+      "Ich mag Kaffee."
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Ich möchte Kaffee" means "I would like coffee."'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "Ich möchte einen Apfel." mean?',
+
+    audio:
+      "Ich möchte einen Apfel.",
+
+    answers: [
+      "I have an apple.",
+      "I eat an apple.",
+      "I would like an apple.",
+      "I see an apple."
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Ich möchte einen Apfel" means "I would like an apple."'
+  }
+
+];
+
+
+let lesson7CurrentQuestion = 0;
+
+let lesson7Score = 0;
+
+let lesson7XP = 0;
+
+
+/* ==================================================
+   START LESSON 7
+================================================== */
+
+function startLesson7() {
+
+  lesson7CurrentQuestion = 0;
+
+  lesson7Score = 0;
+
+  lesson7XP = 0;
+
+
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson7Player")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson7Result")
+    .classList.add("hidden");
+
+
+  loadLesson7Question();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   LOAD QUESTION
+================================================== */
+
+function loadLesson7Question() {
+
+  const question =
+    foodLesson[
+      lesson7CurrentQuestion
+    ];
+
+
+  document
+    .getElementById("lesson7QuestionType")
+    .textContent =
+    question.type;
+
+
+  document
+    .getElementById("lesson7QuestionText")
+    .textContent =
+    question.question;
+
+
+  document
+    .getElementById("lesson7QuestionNumber")
+    .textContent =
+    lesson7CurrentQuestion + 1;
+
+
+  document
+    .getElementById("lesson7TotalQuestions")
+    .textContent =
+    foodLesson.length;
+
+
+  const percentage =
+
+    (
+      (lesson7CurrentQuestion + 1)
+      /
+      foodLesson.length
+    ) * 100;
+
+
+  document
+    .getElementById("lesson7Progress")
+    .style.width =
+    percentage + "%";
+
+
+  document
+    .getElementById("lesson7XP")
+    .textContent =
+    lesson7XP;
+
+
+  const grid =
+    document.getElementById(
+      "lesson7AnswerGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  question.answers.forEach(
+
+    function(answer, index) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "answer-option";
+
+
+      button.textContent =
+        answer;
+
+
+      button.onclick = function() {
+
+        selectLesson7Answer(
+          index,
+          button
+        );
+
+      };
+
+
+      grid.appendChild(button);
+
+    }
+
+  );
+
+
+  document
+    .getElementById("lesson7Feedback")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson7NextButton")
+    .classList.add("hidden");
+
+}
+
+
+/* ==================================================
+   SELECT ANSWER
+================================================== */
+
+function selectLesson7Answer(
+  selected,
+  button
+) {
+
+  const question =
+    foodLesson[
+      lesson7CurrentQuestion
+    ];
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#lesson7AnswerGrid .answer-option"
+    );
+
+
+  buttons.forEach(
+
+    function(btn) {
+
+      btn.disabled = true;
+
+    }
+
+  );
+
+
+  const correct =
+    selected === question.correct;
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    lesson7Score++;
+
+    lesson7XP += 10;
+
+
+    document
+      .getElementById("lesson7FeedbackIcon")
+      .textContent =
+      "✓";
+
+
+    document
+      .getElementById("lesson7FeedbackTitle")
+      .textContent =
+      "Correct! 🎉";
+
+
+    document
+      .getElementById("lesson7FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    buttons[
+      question.correct
+    ].classList.add(
+      "correct"
+    );
+
+
+    document
+      .getElementById("lesson7FeedbackIcon")
+      .textContent =
+      "✕";
+
+
+    document
+      .getElementById("lesson7FeedbackTitle")
+      .textContent =
+      "Not quite";
+
+
+    document
+      .getElementById("lesson7FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+
+  document
+    .getElementById("lesson7XP")
+    .textContent =
+    lesson7XP;
+
+
+  document
+    .getElementById("lesson7Feedback")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("lesson7NextButton")
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* ==================================================
+   NEXT QUESTION
+================================================== */
+
+function nextLesson7Question() {
+
+  lesson7CurrentQuestion++;
+
+
+  if (
+    lesson7CurrentQuestion >=
+    foodLesson.length
+  ) {
+
+    finishLesson7();
+
+    return;
+
+  }
+
+
+  loadLesson7Question();
+
+}
+
+
+/* ==================================================
+   FINISH LESSON 7
+================================================== */
+
+function finishLesson7() {
+
+  const lessonNumber = 7;
+
+
+  if (
+    !userData.completedLessons
+      .includes(lessonNumber)
+  ) {
+
+    userData.completedLessons.push(
+      lessonNumber
+    );
+
+    userData.completed++;
+
+    userData.xp += lesson7XP;
+
+    saveProgress();
+
+  }
+
+
+  document
+    .getElementById("lesson7Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson7Result")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson7FinalScore")
+    .textContent =
+
+    lesson7Score +
+    "/" +
+    foodLesson.length;
+
+
+  document
+    .getElementById("lesson7FinalXP")
+    .textContent =
+
+    "+" +
+    lesson7XP +
+    " XP";
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   CLOSE LESSON 7
+================================================== */
+
+function closeLesson7() {
+
+  document
+    .getElementById("lesson7Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+}
+
+
+/* ==================================================
+   RETURN TO DASHBOARD
+================================================== */
+
+function returnFromLesson7() {
+
+  document
+    .getElementById("lesson7Result")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   RESTART LESSON 7
+================================================== */
+
+function restartLesson7() {
+
+  document
+    .getElementById("lesson7Result")
+    .classList.add("hidden");
+
+
+  startLesson7();
+
+}
+
+
+/* ==================================================
+   LESSON 7 AUDIO
+================================================== */
+
+function playLesson7Audio() {
+
+  const question =
+    foodLesson[
+      lesson7CurrentQuestion
+    ];
+
+
+  speakGerman(
+    question.audio
+  );
+
+}
+
+
+/* ==================================================
+   CONNECT LESSON 7
+================================================== */
+
+const previousOpenLesson7 =
+  openLesson;
+
+
+openLesson = function(number) {
+
+  if (number === 7) {
+
+    if (
+      !userData.completedLessons
+        .includes(6)
+    ) {
+
+      showMessage(
+        "Complete Lesson 6 first 🔒"
+      );
+
+      return;
+
+    }
+
+
+    startLesson7();
+
+    return;
+
+  }
+
+
+  previousOpenLesson7(number);
+
+};
