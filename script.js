@@ -1197,13 +1197,13 @@ const introducingLesson = [
     type: "TRANSLATE",
 
     question:
-      'What does "Ich bin Rahul." mean?',
+      'What does "Ich bin max." mean?',
 
     audio:
-      "Ich bin Rahul.",
+      "Ich bin max.",
 
     answers: [
-      "I am Rahul.",
+      "I am max.",
       "My name is Germany.",
       "I live in Germany.",
       "I speak German."
@@ -1212,7 +1212,7 @@ const introducingLesson = [
     correct: 0,
 
     explanation:
-      '"Ich bin Rahul" means "I am Rahul."'
+      '"Ich bin max" means "I am max."'
   },
 
 
@@ -1220,14 +1220,14 @@ const introducingLesson = [
     type: "TRANSLATE",
 
     question:
-      'What does "Ich heiße Rahul." mean?',
+      'What does "Ich heiße max." mean?',
 
     audio:
-      "Ich heiße Rahul.",
+      "Ich heiße max.",
 
     answers: [
       "I am 17 years old.",
-      "My name is Rahul.",
+      "My name is max.",
       "I live in India.",
       "I like German."
     ],
@@ -1235,7 +1235,7 @@ const introducingLesson = [
     correct: 1,
 
     explanation:
-      '"Ich heiße Rahul" means "My name is Rahul."'
+      '"Ich heiße max" means "My name is max."'
   },
 
 
@@ -1243,15 +1243,15 @@ const introducingLesson = [
     type: "CHOOSE",
 
     question:
-      'How do you say "My name is Rahul" in German?',
+      'How do you say "My name is max" in German?',
 
     audio:
-      "Ich heiße Rahul.",
+      "Ich heiße max.",
 
     answers: [
-      "Ich komme Rahul.",
+      "Ich komme max.",
       "Ich bin Deutschland.",
-      "Ich heiße Rahul.",
+      "Ich heiße max.",
       "Ich wohne Rahul."
     ],
 
@@ -1297,7 +1297,7 @@ const introducingLesson = [
     answers: [
       "Ich wohne in Indien.",
       "Ich heiße Indien.",
-      "Ich komme Rahul.",
+      "Ich komme max.",
       "Ich bin Indien."
     ],
 
