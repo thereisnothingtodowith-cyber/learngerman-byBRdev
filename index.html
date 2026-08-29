@@ -2377,4 +2377,212 @@ Learn German. Interactively.
   </div>
 
 </section>  
+  <!-- ==================================================
+     PART 9 — LESSON 7
+     FOOD, DRINKS & "ICH MÖCHTE..."
+================================================== -->
+
+<section
+  id="lesson7Player"
+  class="lesson-player hidden"
+>
+
+  <div class="lesson-player-container">
+
+    <div class="lesson-player-top">
+
+      <button
+        class="exit-lesson"
+        onclick="closeLesson7()"
+      >
+        ← Exit
+      </button>
+
+      <div class="lesson-title">
+
+        <span>A1 · LESSON 07</span>
+
+        <strong>Food & Drinks</strong>
+
+      </div>
+
+      <div class="lesson-xp">
+        ⚡ <span id="lesson7XP">0</span> XP
+      </div>
+
+    </div>
+
+
+    <div class="lesson-progress-area">
+
+      <div class="lesson-progress-track">
+
+        <div
+          id="lesson7Progress"
+          class="lesson-progress-fill"
+        ></div>
+
+      </div>
+
+      <div class="question-counter">
+
+        <span id="lesson7QuestionNumber">1</span>
+        /
+        <span id="lesson7TotalQuestions">6</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="interactive-question">
+
+      <span
+        id="lesson7QuestionType"
+        class="question-type"
+      >
+        VOCABULARY
+      </span>
+
+
+      <h1 id="lesson7QuestionText">
+        What does "Brot" mean?
+      </h1>
+
+
+      <button
+        class="audio-large"
+        onclick="playLesson7Audio()"
+      >
+        🔊
+      </button>
+
+
+      <div
+        id="lesson7AnswerGrid"
+        class="answer-grid"
+      >
+      </div>
+
+
+      <div
+        id="lesson7Feedback"
+        class="answer-feedback hidden"
+      >
+
+        <div id="lesson7FeedbackIcon">
+          ✓
+        </div>
+
+        <div>
+
+          <strong id="lesson7FeedbackTitle">
+            Correct!
+          </strong>
+
+          <p id="lesson7FeedbackText">
+            Great job!
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="lesson7NextButton"
+        class="next-question hidden"
+        onclick="nextLesson7Question()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     PART 9 — LESSON 7 RESULT
+================================================== -->
+
+<section
+  id="lesson7Result"
+  class="result-screen hidden"
+>
+
+  <div class="result-card">
+
+    <div class="result-icon">
+      🍎
+    </div>
+
+    <span class="result-label">
+      LESSON COMPLETE
+    </span>
+
+    <h1>
+      Lecker! 🎉
+    </h1>
+
+    <p>
+      You've completed
+      <strong>Food & Drinks</strong>.
+    </p>
+
+
+    <div class="result-score">
+
+      <div>
+
+        <strong id="lesson7FinalScore">
+          0/6
+        </strong>
+
+        <span>
+          Correct answers
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong id="lesson7FinalXP">
+          +0 XP
+        </strong>
+
+        <span>
+          XP earned
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="result-actions">
+
+      <button
+        class="primary-btn"
+        onclick="returnFromLesson7()"
+      >
+        Back to A1 →
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="restartLesson7()"
+      >
+        Try Again
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+  
 </html>
