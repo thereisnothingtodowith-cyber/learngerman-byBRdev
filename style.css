@@ -1875,3 +1875,650 @@ footer p {
   }
 
 }
+/* ==================================================
+   PART 10 — LESSON 8
+   TIME, DAYS & DATES
+================================================== */
+
+
+const timeLesson = [
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Montag" mean?',
+
+    audio:
+      "Montag",
+
+    answers: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Friday"
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Montag" means Monday.'
+  },
+
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "Freitag" mean?',
+
+    audio:
+      "Freitag",
+
+    answers: [
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Freitag" means Friday.'
+  },
+
+
+  {
+    type: "VOCABULARY",
+
+    question:
+      'What does "heute" mean?',
+
+    audio:
+      "heute",
+
+    answers: [
+      "Tomorrow",
+      "Yesterday",
+      "Today",
+      "Tonight"
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Heute" means today.'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'What does "morgen" mean?',
+
+    audio:
+      "morgen",
+
+    answers: [
+      "Yesterday",
+      "Today",
+      "Tomorrow",
+      "Morning"
+    ],
+
+    correct: 2,
+
+    explanation:
+      '"Morgen" can mean tomorrow. It can also mean morning depending on context.'
+  },
+
+
+  {
+    type: "TRANSLATE",
+
+    question:
+      'What does "Heute ist Montag." mean?',
+
+    audio:
+      "Heute ist Montag.",
+
+    answers: [
+      "Today is Monday.",
+      "Tomorrow is Monday.",
+      "Yesterday was Monday.",
+      "Monday is tomorrow."
+    ],
+
+    correct: 0,
+
+    explanation:
+      '"Heute ist Montag" means "Today is Monday."'
+  },
+
+
+  {
+    type: "GRAMMAR",
+
+    question:
+      'How do you ask "What time is it?" in German?',
+
+    audio:
+      "Wie spät ist es?",
+
+    answers: [
+      "Wie alt bist du?",
+      "Wie spät ist es?",
+      "Wo bist du?",
+      "Was machst du?"
+    ],
+
+    correct: 1,
+
+    explanation:
+      '"Wie spät ist es?" means "What time is it?"'
+  }
+
+];
+
+
+let lesson8CurrentQuestion = 0;
+
+let lesson8Score = 0;
+
+let lesson8XP = 0;
+
+
+/* ==================================================
+   START LESSON 8
+================================================== */
+
+function startLesson8() {
+
+  lesson8CurrentQuestion = 0;
+
+  lesson8Score = 0;
+
+  lesson8XP = 0;
+
+
+  document
+    .getElementById("dashboard")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson8Player")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson8Result")
+    .classList.add("hidden");
+
+
+  loadLesson8Question();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   LOAD QUESTION
+================================================== */
+
+function loadLesson8Question() {
+
+  const question =
+    timeLesson[
+      lesson8CurrentQuestion
+    ];
+
+
+  document
+    .getElementById("lesson8QuestionType")
+    .textContent =
+    question.type;
+
+
+  document
+    .getElementById("lesson8QuestionText")
+    .textContent =
+    question.question;
+
+
+  document
+    .getElementById("lesson8QuestionNumber")
+    .textContent =
+    lesson8CurrentQuestion + 1;
+
+
+  document
+    .getElementById("lesson8TotalQuestions")
+    .textContent =
+    timeLesson.length;
+
+
+  const percentage =
+
+    (
+      (lesson8CurrentQuestion + 1)
+      /
+      timeLesson.length
+    ) * 100;
+
+
+  document
+    .getElementById("lesson8Progress")
+    .style.width =
+    percentage + "%";
+
+
+  document
+    .getElementById("lesson8XP")
+    .textContent =
+    lesson8XP;
+
+
+  const grid =
+    document.getElementById(
+      "lesson8AnswerGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  question.answers.forEach(
+
+    function(answer, index) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.className =
+        "answer-option";
+
+
+      button.textContent =
+        answer;
+
+
+      button.onclick = function() {
+
+        selectLesson8Answer(
+          index,
+          button
+        );
+
+      };
+
+
+      grid.appendChild(button);
+
+    }
+
+  );
+
+
+  document
+    .getElementById("lesson8Feedback")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson8NextButton")
+    .classList.add("hidden");
+
+}
+
+
+/* ==================================================
+   SELECT ANSWER
+================================================== */
+
+function selectLesson8Answer(
+  selected,
+  button
+) {
+
+  const question =
+    timeLesson[
+      lesson8CurrentQuestion
+    ];
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#lesson8AnswerGrid .answer-option"
+    );
+
+
+  buttons.forEach(
+
+    function(btn) {
+
+      btn.disabled = true;
+
+    }
+
+  );
+
+
+  const correct =
+    selected === question.correct;
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+
+    lesson8Score++;
+
+    lesson8XP += 10;
+
+
+    document
+      .getElementById("lesson8FeedbackIcon")
+      .textContent =
+      "✓";
+
+
+    document
+      .getElementById("lesson8FeedbackTitle")
+      .textContent =
+      "Correct! 🎉";
+
+
+    document
+      .getElementById("lesson8FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+  else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+
+    buttons[
+      question.correct
+    ].classList.add(
+      "correct"
+    );
+
+
+    document
+      .getElementById("lesson8FeedbackIcon")
+      .textContent =
+      "✕";
+
+
+    document
+      .getElementById("lesson8FeedbackTitle")
+      .textContent =
+      "Not quite";
+
+
+    document
+      .getElementById("lesson8FeedbackText")
+      .textContent =
+      question.explanation;
+
+  }
+
+
+  document
+    .getElementById("lesson8XP")
+    .textContent =
+    lesson8XP;
+
+
+  document
+    .getElementById("lesson8Feedback")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("lesson8NextButton")
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* ==================================================
+   NEXT QUESTION
+================================================== */
+
+function nextLesson8Question() {
+
+  lesson8CurrentQuestion++;
+
+
+  if (
+    lesson8CurrentQuestion >=
+    timeLesson.length
+  ) {
+
+    finishLesson8();
+
+    return;
+
+  }
+
+
+  loadLesson8Question();
+
+}
+
+
+/* ==================================================
+   FINISH LESSON 8
+================================================== */
+
+function finishLesson8() {
+
+  const lessonNumber = 8;
+
+
+  if (
+    !userData.completedLessons
+      .includes(lessonNumber)
+  ) {
+
+    userData.completedLessons.push(
+      lessonNumber
+    );
+
+    userData.completed++;
+
+    userData.xp += lesson8XP;
+
+    saveProgress();
+
+  }
+
+
+  document
+    .getElementById("lesson8Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("lesson8Result")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("lesson8FinalScore")
+    .textContent =
+
+    lesson8Score +
+    "/" +
+    timeLesson.length;
+
+
+  document
+    .getElementById("lesson8FinalXP")
+    .textContent =
+
+    "+" +
+    lesson8XP +
+    " XP";
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   CLOSE LESSON 8
+================================================== */
+
+function closeLesson8() {
+
+  document
+    .getElementById("lesson8Player")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+}
+
+
+/* ==================================================
+   RETURN TO DASHBOARD
+================================================== */
+
+function returnFromLesson8() {
+
+  document
+    .getElementById("lesson8Result")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  updateDashboard();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ==================================================
+   RESTART LESSON 8
+================================================== */
+
+function restartLesson8() {
+
+  document
+    .getElementById("lesson8Result")
+    .classList.add("hidden");
+
+
+  startLesson8();
+
+}
+
+
+/* ==================================================
+   LESSON 8 AUDIO
+================================================== */
+
+function playLesson8Audio() {
+
+  const question =
+    timeLesson[
+      lesson8CurrentQuestion
+    ];
+
+
+  speakGerman(
+    question.audio
+  );
+
+}
+
+
+/* ==================================================
+   CONNECT LESSON 8
+================================================== */
+
+const previousOpenLesson8 =
+  openLesson;
+
+
+openLesson = function(number) {
+
+  if (number === 8) {
+
+    if (
+      !userData.completedLessons
+        .includes(7)
+    ) {
+
+      showMessage(
+        "Complete Lesson 7 first 🔒"
+      );
+
+      return;
+
+    }
+
+
+    startLesson8();
+
+    return;
+
+  }
+
+
+  previousOpenLesson8(number);
+
+};
